@@ -3,6 +3,6 @@
 pragma solidity ^0.8.0
 import "import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
-contract Web3BnBStay is ERC721 {
+contract Web3BnBStay is ERC721URIStorage {
 
 }
