@@ -2,10 +2,32 @@ import React, { useEffect } from 'react'
 import './Home.scss'
 
 import SearchBar from '../../components/common/search-bar/SearchBar'
+import ConnectWallet from '../../components/common/connect-wallet/ConnectWallet'
+
+
+import { ethers } from "ethers";
 
 import imgRentalCabin from '../../assets/rental_cabin.jpg';
 
-const Main = ({}) => {
+const Main = ({connectWallet, noWalletDetected, walletNotConnected, selectedAddress}) => {
+
+  const NoWalletDetected = () => {
+    return (
+      <p>no wallet there mate</p>
+    )
+  }
+
+  const ConnectWallet = () => {
+    return (
+      <p>connect that wallet mate</p>
+    )
+  }
+
+  const GoodWalletCheck = () => {
+    return (
+      <p>connect that wallet mate</p>
+    )
+  }
 
   return (
     <>
@@ -15,6 +37,16 @@ const Main = ({}) => {
       </p>
 
       <SearchBar />
+
+      {noWalletDetected && 
+        <NoWalletDetected />
+      }
+      {connectWallet && 
+        <ConnectWallet connectWallet={connectWallet}/>
+      }
+      {!selectedAddress && 
+        <GoodWalletCheck />
+      }
       
       <section className="rental-properties-examples">
         <p className="site-default">
