@@ -1,0 +1,56 @@
+@import '../styles/_all-utility-sheets.scss';
+
+main {
+    color: $body-text-color;
+    width: 100%;    
+    align-self: center;
+    justify-content: center;
+    padding: 0 $large;
+}
+
+.main-content-wrapper {
+    height: 100%;
+    max-width: 800px;
+    margin-top: $xxxxxl;
+    padding-bottom: $xxl;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    @media (max-width: 425px) {
+        max-width: 325px;
+      }
+}
+
+h1 {
+    text-align: center;
+    font-family: $title-font;
+    font-size: $font-xxxl;
+    font-weight: 1000;
+}
+
+p.site-default {
+    width: 100%;
+    font-family: $body-font;
+    &:not(:first-child) {
+        margin-top: $large;
+    }
+    max-width: 625px;
+    line-height: 1.4;
+    font-family: $body-font;
+    font-size: $font-xxl;
+    &.description-after-title {
+        margin-top: $xl;
+    }
+    text-align: center;
+
+}
+
+main {
+    a {
+        color: $blue-anchor;
+        text-decoration: none;
+    }
+    a:visited {
+        color: $blue;
+    }
+}
