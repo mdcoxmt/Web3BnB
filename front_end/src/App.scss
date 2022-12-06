@@ -1,0 +1,39 @@
+@import './styles/_reset.scss';
+@import './styles/_all-utility-sheets.scss';
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+// removes a highlighting problem on iPhones and Chrome
+*:focus {
+    outline-style: none;
+}
+
+.App {
+    min-height: calc(100vh);
+    padding: 0 0;
+    display: flex;
+    justify-content: center;
+}
+
+body {
+    background-color: $bg;
+}
+
+.site-wrapper {
+    // min-width: 100vw;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    max-width: 100%;
+}
+
+.logo-mini {
+  width: 50px;
+}

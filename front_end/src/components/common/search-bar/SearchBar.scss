@@ -1,0 +1,60 @@
+@import '../../../styles/_all-utility-sheets.scss';
+
+.search-wrapper {
+    width: 750px;
+    align-self: center;
+    display: flex;
+    padding-top: $xxxl;
+    @media (max-width: 825px) {
+      max-width: 500px;
+    }
+    @media (max-width: 500px) {
+        padding-top: $xxl;
+        max-width: 325px;
+      }
+    // @media (min-height: 500px) {
+    //     max-width: 425px;
+    //     margin-top: $xxxl;
+    // }
+}
+
+.search-box {
+  border: 2px solid transparent;
+  border-radius: 2px;
+  font-size: $large;
+  width: 100%;
+  min-height: 62px;
+  padding: 1rem;
+  transition: width 0.3s;
+  border-radius: 10px;
+  border: 1px solid $grey-7;
+  @media (max-width: 500px) {
+    &,
+    &::-webkit-input-placeholder {
+        font-size: 16px;
+    }
+  }
+
+
+}
+
+.search-box:focus {
+  width: 100%;
+  outline: none;
+  border: 2px solid hsla(258,66%,87%,1);
+}
+
+.suitcase-icon {
+  height: 100%;
+  width: 2em;
+  margin-left: -3em;
+  margin-top: .65em;
+  opacity: 0.2;
+  background-color: transparent;
+  border: 0;
+  &:hover {
+      outline: none;
+      opacity: 0.4;
+      cursor: pointer;
+  }
+}
