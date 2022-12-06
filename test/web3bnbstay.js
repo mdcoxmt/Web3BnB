@@ -22,7 +22,7 @@ describe("Mint Web3BnBStay Contract", function() {
             const initialBalance = await web3bnbstay.balanceOf(hodler1.address)
             expect(initialBalance.toString()).to.equal("0");
             
-            await web3bnbstay._safemint(holder1.address, tokenID);
+            await web3bnbstay.mint(hodler1.address, TOKEN_URI);
 
             const finalBalance = await web3bnbstay.balanceOf(hodler1.address)
             expect(finalBalance.toString()).to.equal("1");
