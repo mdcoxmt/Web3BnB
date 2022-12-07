@@ -8,7 +8,7 @@ describe("Mint Web3BnBStay Contract", function() {
 
     const TOKEN_URI = "DUMMY_TOKEN_URI"
     const PROPERTY_URI = "DUMMY_PROPERTY_URI"
-    const nightList = "12-6-22, 12-7-22, 12-8-22"
+    const nightList = "[12-6-22, 12-7-22, 12-8-22]"
 
     beforeEach(async function() {
             Web3BnBStayFactory = await ethers.getContractFactory("Web3BnBStay");
