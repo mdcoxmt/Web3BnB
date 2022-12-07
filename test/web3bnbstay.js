@@ -8,6 +8,7 @@ describe("Mint Web3BnBStay Contract", function() {
 
     const TOKEN_URI = "DUMMY_TOKEN_URI"
     const PROPERTY_URI = "DUMMY_PROPERTY_URI"
+    const nightList = "12-6-22, 12-7-22, 12-8-22"
 
     beforeEach(async function() {
             Web3BnBStayFactory = await ethers.getContractFactory("Web3BnBStay");
@@ -24,16 +25,21 @@ describe("Mint Web3BnBStay Contract", function() {
             const initialStayBalance = await web3bnbstay.balanceOf(hodler1.address)
             expect(initialStayBalance.toString()).to.equal("0");
             
-            await web3bnbstay.connect(hodler1).mintStay(TOKEN_URI, 2, 5, {value:"10"});
+            await web3bnbstay.connect(hodler1).mintStay(PROPERTY_URI, 2, 5, nightList, {value:"10"});
 
             const finalBalance = await web3bnbstay.balanceOf(hodler1.address)
             expect(finalBalance.toString()).to.equal("1");
         })
 
         it("Should reject mintStay if caller's msg.value too low", async function(){
-            await expect(web3bnbstay.connect(hodler2).mintStay(TOKEN_URI, 100, 100, {value: "9999"})).to.be.revertedWith("You don't have enough funds to book this date")
+            await expect(web3bnbstay.connect(hodler2).mintStay(PROPERTY_URI, 100, 100, nightList, {value: "9999"})).to.be.revertedWith("You don't have enough funds to book this date")
         })
 
+        it("Should pass correct metadata into tokenURI", async function(){
+            await web3bnbstay.connect(hodler1).mintStay(PROPERTY_URI, 2, 5, nightList, {value:"10"});
+            await expect(web3bnbstay.tokenURI(1)).to.equal("data:application/json;base64,J3sibmFtZSI6IicsIFlvdXIgQm9va2luZywnIiwgImRlc2NyaXB0aW9uIjogIicsIERVTU1ZX1BST1BFUlRZX1VSSSwgJyInLCcsICJhdHRyaWJ1dGVzIjogJywgMTItNi0yMiwgMTItNy0yMiwgMTItOC0yMiwnLCAiaW1hZ2UiOiInLCB3ZWIzYm5iLnNob3AvbG9nby5wbmcsICcifSc=")
+
+        })
     })
    
 
