@@ -6,6 +6,7 @@ import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "./base64.sol";
 
 contract Web3BnBStay is ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
@@ -14,20 +15,19 @@ contract Web3BnBStay is ERC721URIStorage, Ownable {
 
     constructor() ERC721("Web3BnBStay", "STAY"){}
 
-    function mintStay(string calldata propertyURI, uint256 nightlyPrice, uint256 dateCount, string calldata nightList, ) public payable{
+    function mintStay(string calldata propertyURI, uint256 nightlyPrice, uint256 dateCount, string calldata nightList) public payable{
        
        //uint256 totalPrice = nightlyPrice * dateCount;
        require (msg.value >= nightlyPrice * dateCount, "You don't have enough funds to book this date");
-
-       _tokenIds.increment();
         // Set the latest Id for the NFT minted here. 
         uint256 newItemId = _tokenIds.current();
         // Associate the address of the NFT owner with the id of the NFT
         _mint(msg.sender, newItemId);
-        // Associate the NFT URI with the Id
+        // Associate the NFT URI with the Id, and format the metadata
         _setTokenURI(newItemId, formatTokenURI("web3bnb.shop/logo.png", "Your Booking", propertyURI, nightList));
+        _tokenIds.increment();
     }
-
+    //a function from the internet that packages the metadata for a NFT within a function
     function formatTokenURI(string memory _imageURI, string memory _name, string memory _description, string memory _properties) public pure returns (string memory) {
         return string(
             abi.encodePacked(
@@ -44,4 +44,5 @@ contract Web3BnBStay is ERC721URIStorage, Ownable {
                 )
             )
         );
+    }
 }
