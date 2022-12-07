@@ -5,26 +5,27 @@ pragma solidity ^0.8.17;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
-import"@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract Web3BnBStay is ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
-    constructor() ERC721("Web3BnBStay", "STAY"){}
 
     Counters.Counter private _tokenIds;
 
-    function mintStay(address recipient, string memory tokenURI) public onlyOwner {
-        // Increment the number of NFTs minted.
-        _tokenIds.increment();
+    constructor() ERC721("Web3BnBStay", "STAY"){}
 
-        // Set the latest Id for the NFT minted here.
+    function mintStay(string calldata propertyURI, uint256 nightlyPrice, uint256 dateCount) public payable{
+       
+       //uint256 totalPrice = nightlyPrice * dateCount;
+       require (msg.value >= nightlyPrice * dateCount, "You don't have enough funds to book this date");
+
+       _tokenIds.increment();
+        // Set the latest Id for the NFT minted here. Needs to be 'propertyURI.dates', so if propertyURI is 1, dates are 126202212720221282022 (Dec6-8 '22), ItemID is 1126202212720221282022?
         uint256 newItemId = _tokenIds.current();
-        
         // Associate the address of the NFT owner with the id of the NFT
-        _mint(recipient, newItemId);
-        
+        _mint(msg.sender, newItemId);
         // Associate the NFT URI with the Id
-        _setTokenURI(newItemId, tokenURI);
+        _setTokenURI(newItemId, propertyURI);
     }
 
 }
