@@ -18,16 +18,20 @@ async function main() {
 
   const web3BnBStay = await hre.ethers.getContractFactory("Web3BnBStay");
   console.log('Deploying Web3BnBStay ERC721 token...');
-  const token = await web3BnBStay.deploy();
+  const tokenStay = await web3BnBStay.deploy();
 
-  await token.deployed();
-  console.log("BadgeToken deployed to:", token.address);
+  // const web3BnBListing = await hre.ethers.getContractFactory("Web3BnBStay");
+  // console.log('Deploying Web3BnBStay ERC721 token...');
+  // const tokenListing = await web3BnBStay.deploy();
 
-  saveFrontendFiles(token);
+  await tokenStay.deployed();
+  console.log("BadgeToken deployed to:", tokenStay.address);
+
+  saveFrontendFiles(tokenStay);
 
 }
 
-function saveFrontendFiles(token) {
+function saveFrontendFiles(tokenStay) {
   const fs = require("fs");
   const contractsDir = __dirname + "/../front_end/src/contracts";
 
@@ -37,7 +41,7 @@ function saveFrontendFiles(token) {
 
   fs.writeFileSync(
     contractsDir + "/contract-address.json",
-    JSON.stringify({ Token: token.address }, undefined, 2)
+    JSON.stringify({ Token: tokenStay.address }, undefined, 2)
   );
 
   const Web3BnBStay_Artifact = artifacts.readArtifactSync("Web3BnBStay");
