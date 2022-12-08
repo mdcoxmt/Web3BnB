@@ -36,6 +36,7 @@ function App() {
         {/* <BurgerMenu /> */}
         <Header />
         <main>
+          <div className='bg-wrapper' ></div>
           <div className={`main-content-wrapper main-content-wrapper-page-`}>
             <Routes>
               <Route path="/" exact element={<Home connectWallet={connectWallet} selectedAddress={selectedAddress} />} />
