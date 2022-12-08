@@ -27,6 +27,7 @@ contract Web3BnBListing is ERC721URIStorage, Ownable {
         // Associate the NFT URI with the Id, and format the metadata
         _setTokenURI(newItemId, formatTokenURI(logoEncoded, streetAddress, description, _nightlyPrice));
         console.log("TokenURI is", tokenURI(newItemId));
+        console.log("TokenId is", newItemId);
         _tokenIds.increment();
     }
 
