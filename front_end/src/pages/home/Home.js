@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import './Home.scss'
 
 import SearchBar from '../../components/common/search-bar/SearchBar'
+import RenderWalletMode from '../../components/common/render-wallet-mode/RenderWalletMode'
 import ConnectWallet from '../../components/common/connect-wallet/ConnectWallet'
 
 
@@ -9,25 +10,9 @@ import { ethers } from "ethers";
 
 import imgRentalCabin from '../../assets/rental_cabin.jpg';
 
-const Main = ({connectWallet, noWalletDetected, walletNotConnected, selectedAddress}) => {
-
-  const NoWalletDetected = () => {
-    return (
-      <p>no wallet there mate</p>
-    )
-  }
-
-  const ConnectWallet = () => {
-    return (
-      <p>connect that wallet mate</p>
-    )
-  }
-
-  const GoodWalletCheck = () => {
-    return (
-      <p>connect that wallet mate</p>
-    )
-  }
+const Home = ({connectWallet, selectedAddress}) => {
+  
+  console.log('Home selectedAddress:', selectedAddress)
 
   return (
     <>
@@ -38,15 +23,9 @@ const Main = ({connectWallet, noWalletDetected, walletNotConnected, selectedAddr
 
       <SearchBar />
 
-      {noWalletDetected && 
-        <NoWalletDetected />
-      }
-      {connectWallet && 
-        <ConnectWallet connectWallet={connectWallet}/>
-      }
-      {!selectedAddress && 
-        <GoodWalletCheck />
-      }
+      <ConnectWallet connectWallet={connectWallet} selectedAddress={selectedAddress}/>
+
+      {/* <RenderWalletMode connectWallet={connectWallet} selectedAddress={selectedAddress} /> */}
       
       <section className="rental-properties-examples">
         <p className="site-default">
@@ -55,8 +34,8 @@ const Main = ({connectWallet, noWalletDetected, walletNotConnected, selectedAddr
       </section>
 
       <img className="web3bnb-rental-cabin-photo" alt="web3bnb-rental-cabin" src={imgRentalCabin} />
-    </>
+  </>
   )
 }
 
-export default Main
+export default Home

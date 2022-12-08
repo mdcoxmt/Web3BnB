@@ -11,8 +11,8 @@ import './App.scss';
 import './pages/pages.scss';
 
 import {ethers} from 'ethers'
-import StayNFT from "./contracts/StayNFT-mock.json";
-import contractAddress from "./contracts/contract-address-mock.json";
+import StayNFT from "./contracts/Web3BnBStay.json";
+import contractAddress from "./contracts/contract-address.json";
 // This is the Hardhat Network id, you might change it in the hardhat.config.js.
 // If you are using MetaMask, be sure to change the Network id to 1337.
 // Here's a list of network ids https://docs.metamask.io/guide/ethereum-provider.html#properties
@@ -26,22 +26,21 @@ const ERROR_CODE_TX_REJECTED_BY_USER = 4001;
 //   3. Polls the user's Stays/Listings to keep it updated
 //   4. Renders the whole application
 function App() {
-  const [noWalletDetected, setNoWalletDetected] = useState(undefined);
-  const [walletNotConnected, setWalletNotConnected] = useState(undefined);
+  
   const [selectedAddress, setSelectedAddress] = useState(undefined);
   const [networkError, setNetworkError] = useState(undefined);
 
   useEffect(() => {
-    //Runs only on the first render
-    if (window.ethereum === undefined) {
-      setNoWalletDetected(false)
-    } else if (!selectedAddress) {
-      setWalletNotConnected(true)
-    } else {
-      
-    }
+    console.log('test selectedAddress:', selectedAddress)
+  }, [selectedAddress]);
 
-  }, []);
+  if (selectedAddress) {
+    console.log('selectedAddress exists')
+  } else {
+    console.log('selectedAddress does not exist')
+
+  }
+
 
   return (
     <Router>
@@ -51,8 +50,8 @@ function App() {
         <main>
           <div className={`main-content-wrapper main-content-wrapper-page-`}>
             <Routes>
-              <Route path="/" exact element={<Home noWalletDetected={noWalletDetected} walletNotConnected={walletNotConnected} connectWallet={connectWallet} selectedAddress={selectedAddress} />} />
-              <Route path="/listings" exact element={<Listings  />} />
+              <Route path="/" exact element={<Home connectWallet={connectWallet} selectedAddress={selectedAddress} />} />
+              <Route path="/listings" exact element={<Listings />} />
               <Route path="/about" exact element={<About />} />
             </Routes>
           </div>
@@ -81,9 +80,9 @@ function App() {
         contractAddress.Token,
         StayNFT.abi,
         provider.getSigner(0)
-      );
-    }
-
+        );
+      }
+      
     function _initialize(userAddress) {
       // This method initializes the dapp
   
@@ -98,43 +97,45 @@ function App() {
       this._getTokenData();
       this._startPollingData();
     }
+    async function connectWallet () {
+        // To connect to the user's wallet, we have to run this method.
+        // It returns a promise that will resolve to the user's address.
 
-    async function connectWallet() {
-      // To connect to the user's wallet, we have to run this method.
-      // It returns a promise that will resolve to the user's address.
+        const [selectedAddress] = await window.ethereum.request({ method: 'eth_requestAccounts' });
 
-      const [selectedAddress] = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        console.log('App level, selectedAddress:', selectedAddress)
 
-      console.log('selectedAddress:', selectedAddress)
-  
-      // Once we have the address, initialize app
-      // First, check the network
-      if (!_checkNetwork()) {
-        return;
-      }
-  
-      _initialize(selectedAddress);
-  
-      // Reinitialize when user changes their account
-      window.ethereum.on("accountsChanged", ([newAddress]) => {
-        this._stopPollingData();
-        // `accountsChanged` event can be triggered with an undefined newAddress.
-        // This happens when the user removes the Dapp from the "Connected
-        // list of sites allowed access to your addresses" (Metamask > Settings > Connections)
-        // To avoid errors, we reset the dapp state 
-        if (newAddress === undefined) {
-          return this._resetState();
+        // Once we have the address, initialize app
+        // First, check the network
+        if (!_checkNetwork()) {
+          return;
         }
+
+        _initialize(selectedAddress);
+
+        // Reinitialize when user changes their account
+        window.ethereum.on("accountsChanged", ([newAddress]) => {
+          this._stopPollingData();
+          // `accountsChanged` event can be triggered with an undefined newAddress.
+          // This happens when the user removes the Dapp from the "Connected
+          // list of sites allowed access to your addresses" (Metamask > Settings > Connections)
+          // To avoid errors, we reset the dapp state 
+          if (newAddress === undefined) {
+            return this._resetState();
+          }
+          
+          this._initialize(newAddress);
+        });
         
-        this._initialize(newAddress);
-      });
-      
-      // We reset the dapp state if the network is changed
-      window.ethereum.on("chainChanged", ([networkId]) => {
-        this._stopPollingData();
-        this._resetState();
-      });
-  }
+        // We reset the dapp state if the network is changed
+        window.ethereum.on("chainChanged", ([networkId]) => {
+          this._stopPollingData();
+          this._resetState();
+        });
+    }
+
+
+    
 }
 
 export default App;

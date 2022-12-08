@@ -7,27 +7,24 @@ $button-bg-hover: hsla(209, 28%, 21%, 1);
 
 .connect-wallet {
     font-family: $title-font;
-    font-size: 18px;
+    font-size: 14px;
     font-weight: 600;
-    text-transform: uppercase;
-    width: 200px;
-    height: 64px;
-    background-color: $button-bg;
-    color: $button-color;
-    border: 2px solid $button-color;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    // text-transform: uppercase;
+    width: 125px;
+    height: 50px;
+    background-color: $header-bg-desaturated-2;
+    color: $bg;
+    border: 2px solid $bg-true;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
     border-radius: 15px;
     transition: .33s;
+    margin-top: $xs;
     &:hover {
         cursor: pointer;
-        background-color: $button-bg-hover;
-        border: 2px solid $button-color-hover;
-        color: $button-color-hover;
+        background-color: $header-bg-desaturated-1;
+        border: 2px solid $header-bg-desaturated-2;
+        color: $bg-true;
     }
-}
-
-.connect-wallet-text {
-    text-shadow: 0 0 1px $button-color;
 }
 
 .button-second-row {
