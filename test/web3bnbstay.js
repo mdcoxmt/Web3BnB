@@ -32,12 +32,7 @@ describe("Mint Web3BnBStay Contract", function() {
         })
 
         it("Should reject mintStay if caller's msg.value too low", async function(){
-            await expect(web3bnbstay.connect(hodler2).mintStay(PROPERTY_URI, 100, stayDate, {value: "9999"})).to.be.revertedWith("You don't have enough funds to book this date")
-        })
-
-        it("Should pass correct metadata into tokenURI", async function(){
-            await web3bnbstay.connect(hodler1).mintStay(PROPERTY_URI, 2, stayDate, {value:"10"});
-            await expect(web3bnbstay.tokenURI(1)).to.equal(metadata1)
+            await expect(web3bnbstay.connect(hodler2).mintStay(PROPERTY_URI, 100, stayDate, {value: "10"})).to.be.revertedWith("You don't have enough funds to book this date")
         })
     })
    
