@@ -29,6 +29,8 @@ function App() {
   
   const [selectedAddress, setSelectedAddress] = useState(undefined);
   const [networkError, setNetworkError] = useState(undefined);
+  const [provider, setProvider] = useState(undefined);
+  const [stayToken, setStayToken] = useState(undefined);
 
   return (
     <Router>
@@ -39,7 +41,7 @@ function App() {
           <div className='bg-wrapper' ></div>
           <div className={`main-content-wrapper main-content-wrapper-page-`}>
             <Routes>
-              <Route path="/" exact element={<Home connectWallet={connectWallet} selectedAddress={selectedAddress} />} />
+              <Route path="/" exact element={<Home connectWallet={connectWallet} selectedAddress={selectedAddress} stayToken={stayToken} /> }  />
               <Route path="/listings" exact element={<Listings connectWallet={connectWallet} selectedAddress={selectedAddress} />} />
               <Route path="/about" exact element={<About />} />
             </Routes>
@@ -63,14 +65,20 @@ function App() {
     async function _initializeEthers() {
       // We first initialize ethers by creating a provider using window.ethereum
       const provider = new ethers.providers.Web3Provider(window.ethereum);
-  
-      // Then, we initialize the contract using that provider and using (ex: our token contract, another contract, etc)
-      this._token = new ethers.Contract(
+
+
+      setProvider(provider)
+
+      let stayToken = new ethers.Contract(
         contractAddress.Token,
         StayNFT.abi,
         provider.getSigner(0)
-        );
-      }
+        )
+  
+      // Then, we initialize the contract using that provider and using (ex: our token contract, another contract, etc)
+      setStayToken(stayToken)
+      console.log('just set StayToken:', stayToken)
+    }
       
     function _initialize(userAddress) {
       // This method initializes the dapp
@@ -83,8 +91,8 @@ function App() {
       // Fetching the token data and the user's balance are specific to this
       // sample project, but you can reuse the same initialization pattern.
       _initializeEthers();
-      this._getTokenData();
-      this._startPollingData();
+      // this._getTokenData();
+      // this._startPollingData();
     }
     async function connectWallet () {
         // To connect to the user's wallet, we have to run this method.
