@@ -3,13 +3,15 @@ import './Home.scss'
 
 import SearchBar from '../../components/common/search-bar/SearchBar'
 import ConnectWallet from '../../components/common/connect-wallet/ConnectWallet'
+import Listings from '../../components/common/listings/Listings'
 
 
 import { ethers } from "ethers";
 
-import imgRentalCabin from '../../assets/rental_cabin.jpg';
-
 const Home = ({connectWallet, selectedAddress}) => {
+
+  const listingsArrayMock = [0, 1, 2, 3, 4, 5, 6];
+
 
   return (
     <>
@@ -22,15 +24,10 @@ const Home = ({connectWallet, selectedAddress}) => {
 
       <ConnectWallet connectWallet={connectWallet} selectedAddress={selectedAddress}/>
 
-      {/* <RenderWalletMode connectWallet={connectWallet} selectedAddress={selectedAddress} /> */}
-      
-      <section className="rental-properties-examples">
-        <p className="site-default">
-        Here's one of our beautiful properties...
-        </p>
-      </section>
+      <Listings listingsArray={listingsArrayMock} />
 
-      <img className="web3bnb-rental-cabin-photo" alt="web3bnb-rental-cabin" src={imgRentalCabin} />
+      {/* <RenderWalletMode connectWallet={connectWallet} selectedAddress={selectedAddress} /> */}
+
   </>
   )
 }

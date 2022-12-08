@@ -1,0 +1,12 @@
+@import '../../../styles/_all-utility-sheets.scss';
+
+.property-listings {
+    margin-top: $xxxl;
+    max-width: 1000px;
+    display: flex;
+    // flex: 0 1 48%;
+    flex-direction: column;
+    align-content: center;
+    flex-wrap: wrap;
+    gap: $baseline;
+}
