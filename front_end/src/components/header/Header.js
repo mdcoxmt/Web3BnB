@@ -20,6 +20,7 @@ const Header = ({}) => {
         <nav className="header-nav">
             <NavLink className="nav-link text-link" data-content="Home" to="/" aria-current="page" >Home</NavLink>
             <NavLink className="nav-link text-link" data-content="Listings" to="/listings">Listings</NavLink>
+            <NavLink className="nav-link text-link" data-content="Create" to="/create">Create</NavLink>
             <NavLink className="nav-link text-link" data-content="About" to="/about">About</NavLink>
             <a className="header-social first" rel="noreferrer" target="_blank" href="https://twitter.com/Web3BnB"><FontAwesomeIcon className="fa first" icon={faTwitter} size={"xl"}/></a>
             <a className="header-social open-sea-logo-wrapper" rel="noreferrer" target="_blank" href="https://opensea.io/Web3BnB">
