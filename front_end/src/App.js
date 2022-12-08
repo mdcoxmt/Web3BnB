@@ -30,18 +30,6 @@ function App() {
   const [selectedAddress, setSelectedAddress] = useState(undefined);
   const [networkError, setNetworkError] = useState(undefined);
 
-  useEffect(() => {
-    console.log('test selectedAddress:', selectedAddress)
-  }, [selectedAddress]);
-
-  if (selectedAddress) {
-    console.log('selectedAddress exists')
-  } else {
-    console.log('selectedAddress does not exist')
-
-  }
-
-
   return (
     <Router>
       <div className="App Dapp site-wrapper">
@@ -51,7 +39,7 @@ function App() {
           <div className={`main-content-wrapper main-content-wrapper-page-`}>
             <Routes>
               <Route path="/" exact element={<Home connectWallet={connectWallet} selectedAddress={selectedAddress} />} />
-              <Route path="/listings" exact element={<Listings />} />
+              <Route path="/listings" exact element={<Listings connectWallet={connectWallet} selectedAddress={selectedAddress} />} />
               <Route path="/about" exact element={<About />} />
             </Routes>
           </div>
@@ -102,8 +90,6 @@ function App() {
         // It returns a promise that will resolve to the user's address.
 
         const [selectedAddress] = await window.ethereum.request({ method: 'eth_requestAccounts' });
-
-        console.log('App level, selectedAddress:', selectedAddress)
 
         // Once we have the address, initialize app
         // First, check the network
