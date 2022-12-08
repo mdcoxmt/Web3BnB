@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: UNLICENSED
+
 pragma solidity ^0.8.17;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
@@ -19,14 +21,15 @@ contract Book {
 
     mapping (string => datesBooked) public calendar;
 
-    function book(string calldata propertyURI, string calldata price, uint256 date) public payable {
+    function book(string calldata propertyURI, string calldata price, uint256 date) public payable returns (string memory){
         
         require(calendar[propertyURI].dates != date);
         uint256 _price = stringToUint(price);
         if(msg.value >= _price){
         { 
-           // Web3BnBStay.mintStay(propertyURI, price, date); - runs the mintStay function, need to deploy and plug in address
+           //Web3BnBStay.mintStay(propertyURI, price, date);
            calendar[propertyURI].dates = date;
+           return("You successfully booked your Web3BnB!");
         }
         }
     }
