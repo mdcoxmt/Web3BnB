@@ -4,11 +4,9 @@ import { faTwitter } from "@fortawesome/free-brands-svg-icons"
 import { NavLink } from "react-router-dom"
 import './Listings.scss'
 
-import RenderWalletMode from '../../components/common/render-wallet-mode/RenderWalletMode'
+import ConnectWallet from '../../components/common/connect-wallet/ConnectWallet';
 
-import logo from '../../assets/web3bnb_logo_thin.jpg';
-
-const Header = ({}) => {
+const Header = ({connectWallet, selectedAddress}) => {
 
   return (
     <>
@@ -16,7 +14,7 @@ const Header = ({}) => {
         <span className="title-in-paragraph">Listings </span>
           is the place to see a Calendar and Location for our listings...
       </p>
-      <RenderWalletMode />
+      <ConnectWallet connectWallet={connectWallet} selectedAddress={selectedAddress} />
     </>
   )
 }

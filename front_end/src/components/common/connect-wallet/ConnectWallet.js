@@ -6,12 +6,10 @@ import './ConnectWallet.scss'
 function ConnectWallet({connectWallet, selectedAddress}) {
 
   if (window.ethereum === undefined) {
-    console.log('no wallet')
     return (
       <p>no wallet there mate</p>
     )
   } else if (!selectedAddress) {
-    console.log('not connected')
 
     return (
       <>
@@ -27,14 +25,13 @@ function ConnectWallet({connectWallet, selectedAddress}) {
       </>
     )
   } else {
-    console.log('wallet connected')
 
     return (
       <>
         <button
           className="connect-wallet connect-wallet-disabled"
           onClick={(selectedAddress) => connectWallet(selectedAddress)}
-          disabled={`${true}`}
+          disabled={true}
         >
             <span className="connect-wallet-text">
                 Wallet Successfully

@@ -10,10 +10,19 @@ const Header = ({}) => {
 
   return (
     <>
-      <p className="site-default">
+      <p className="site-default about-p" id="about-p">
         <span className="title-in-paragraph">Web3BnB </span>
-        is part of Team 10. We have 4 members:
+        is part of Team 10.
       </p>
+      <p className="site-default about-p" id="about-p">
+        We have 4 members:
+      </p>
+      <ul className="about-us-member-list">
+        <li>Duncan</li>
+        <li>Daré</li>
+        <li>WordsPerMinute</li>
+        <li>lectrone</li>
+      </ul>
     </>
   )
 }

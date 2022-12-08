@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import './Home.scss'
 
 import SearchBar from '../../components/common/search-bar/SearchBar'
-import RenderWalletMode from '../../components/common/render-wallet-mode/RenderWalletMode'
 import ConnectWallet from '../../components/common/connect-wallet/ConnectWallet'
 
 
@@ -11,8 +10,6 @@ import { ethers } from "ethers";
 import imgRentalCabin from '../../assets/rental_cabin.jpg';
 
 const Home = ({connectWallet, selectedAddress}) => {
-  
-  console.log('Home selectedAddress:', selectedAddress)
 
   return (
     <>
