@@ -44,7 +44,7 @@ contract Web3BnBStay is ERC721URIStorage, Ownable {
                             '{"name":"', _name,
                              // propertyURI, URI of the associated ListingNFT
                             '", "description": "', _description, '"',
-                            // string array of dates booked
+                            // date booked
                             ', "attributes": ', _properties,
                              // standard Web3BnB logo, wherever that URI is
                             ', "image":"', _imageURI, '"}'

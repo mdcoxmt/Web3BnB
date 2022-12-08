@@ -7,21 +7,50 @@
 const hre = require("hardhat");
 
 async function main() {
-  const currentTimestampInSeconds = Math.round(Date.now() / 1000);
-  const ONE_YEAR_IN_SECS = 365 * 24 * 60 * 60;
-  const unlockTime = currentTimestampInSeconds + ONE_YEAR_IN_SECS;
+  // This is just a convenience check
+  if (network.name === "hardhat") {
+    console.warn(
+      "You are trying to deploy a contract to the Hardhat Network, which" +
+        "gets automatically created and destroyed every time. Use the Hardhat" +
+        " option '--network localhost'"
+    );
+  }
 
-  const lockedAmount = hre.ethers.utils.parseEther("1");
+  const web3BnBStay = await hre.ethers.getContractFactory("Web3BnBStay");
+  console.log('Deploying Web3BnBStay ERC721 token...');
+  const token = await web3BnBStay.deploy();
 
-  const Lock = await hre.ethers.getContractFactory("Lock");
-  const lock = await Lock.deploy(unlockTime, { value: lockedAmount });
+  await token.deployed();
+  console.log("BadgeToken deployed to:", token.address);
 
-  await lock.deployed();
+  saveFrontendFiles(token);
 
-  console.log(
-    `Lock with 1 ETH and unlock timestamp ${unlockTime} deployed to ${lock.address}`
+}
+
+function saveFrontendFiles(token) {
+  const fs = require("fs");
+  const contractsDir = __dirname + "/../front_end/src/contracts";
+
+  if (!fs.existsSync(contractsDir)) {
+    fs.mkdirSync(contractsDir);
+  }
+
+  fs.writeFileSync(
+    contractsDir + "/contract-address.json",
+    JSON.stringify({ Token: token.address }, undefined, 2)
+  );
+
+  const Web3BnBStay_Artifact = artifacts.readArtifactSync("Web3BnBStay");
+
+  fs.writeFileSync(
+    contractsDir + "/Web3BnBStay.json",
+    JSON.stringify(Web3BnBStay_Artifact, null, 2)
   );
 }
+
+
+
+
 
 // We recommend this pattern to be able to use async/await everywhere
 // and properly handle errors.

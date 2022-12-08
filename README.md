@@ -22,6 +22,14 @@ It's a Booking Marketplace.
 
 ## Developer Instructions
 
+run these back-end commands in the project root before running front-end
+1. `npx hardhat compile`
+2. `npx hardhat node`
+2. `npx hardhat run --network localhost scripts/deploy.js`
+
+running the above ^ will make sure your `front_end/src/contracts/` is populated with the files it needs so now...
+4. if you wish, cd into front_end and run this to use the front-end: 1) `npm i` 2) `npm run start` 3) visit in browser `localhost:3000`
+
 ### Contract
 To run locally on your machine:
 `npx hardhat node`
