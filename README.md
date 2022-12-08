@@ -45,3 +45,8 @@ npx hardhat run scripts/deploy.js
 ```
 ### Front-End
 Please see `/front_end` for more information
+
+this: 0xfDD2ca57Bb229ba61c1f953BdDFE82e9555B59ab
+
+
+`Local BadgeToken deployed to:` 0xc61819942a3a585a4403AB5DCae37De0bc4CDef0
