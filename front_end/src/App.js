@@ -6,6 +6,7 @@ import Header from './components/header/Header'
 import Home from './pages/home/Home'
 import Listings from './pages/listings/Listings'
 import About from './pages/about/About'
+import Create from './pages/create/Create'
 
 import './App.scss'
 import './pages/pages.scss'
@@ -90,6 +91,8 @@ function App() {
                   />
                 }
               />
+              <Route path="/create" exact element={<Create connectWallet={connectWallet}
+                    selectedAddress={selectedAddress} />} />
               <Route path="/about" exact element={<About />} />
             </Routes>
           </div>
