@@ -20,12 +20,18 @@ async function main() {
   console.log('Deploying Web3BnBStay ERC721 token...');
   const tokenStay = await web3BnBStay.deploy();
 
-  // const web3BnBListing = await hre.ethers.getContractFactory("Web3BnBStay");
-  // console.log('Deploying Web3BnBStay ERC721 token...');
-  // const tokenListing = await web3BnBStay.deploy();
+  const web3BnBListing = await hre.ethers.getContractFactory("Web3BnBListing");
+  console.log('Deploying Web3BnBListing ERC721 token...');
+  const tokenListing = await web3BnBListing.deploy();
 
   await tokenStay.deployed();
   console.log("BadgeToken deployed to:", tokenStay.address);
+
+  const nightPrice = 50;
+  const propertyAddress = "1000 S Reserve Street, Missoula, MT 59801";
+  const propertyDescription = "A lovely 4 bed, 3 bath home, with views of Lolo Peak and Mount Jumbo. A 10-min drive from downtown, and a 5-min drive from the Bitterroot River make this a perfect stay for city-lovers and fishing enthusiasts alike!";
+
+  await tokenListing.mintListing(nightPrice, propertyAddress, propertyDescription);
 
   saveFrontendFiles(tokenStay);
 

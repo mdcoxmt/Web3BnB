@@ -7,8 +7,8 @@ describe("Mint Web3BnBListing Contract", function() {
     let owner;
 
     const nightPrice = 50
-    const propertyAddress = "3530 Mikes Way, Missoula, MT 59803"
-    const propertyDescription = "A lovely 4 bed, 3 bath home, with views of Lolo Peak and Mount Jumbo. A 10-min drive from downtown, and a 5-min drive from the Bitterroot make this a perfect stay for city-lovers and fishing enthusiasts alike!"
+    const propertyAddress = "3333 Brandon Way, Missoula, MT 59803"
+    const propertyDescription = "A lovely 4 bed, 3 bath home, with views of Lolo Peak and Mount Jumbo. A 10-min drive from downtown, and a 5-min drive from the Bitterroot River make this a perfect stay for city-lovers and fishing enthusiasts alike!"
     beforeEach(async function() {
             Web3BnBListFactory = await ethers.getContractFactory("Web3BnBListing");
             [owner, hodler1, hodler2] = await ethers.getSigners();
