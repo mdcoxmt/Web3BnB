@@ -8,8 +8,8 @@ describe("Mint Web3BnBStay Contract", function() {
 
     const TOKEN_URI = "DUMMY_TOKEN_URI"
     const PROPERTY_URI = "DUMMY_PROPERTY_URI"
-    const nightList = "[12-6-22, 12-7-22, 12-8-22]"
-    const metadata1 ="data:application/json;base64,eyJuYW1lIjoiWW91ciBCb29raW5nIiwgImRlc2NyaXB0aW9uIjogIkRVTU1ZX1BST1BFUlRZX1VSSSIsICJhdHRyaWJ1dGVzIjogWzEyLTYtMjIsIDEyLTctMjIsIDEyLTgtMjJdLCAiaW1hZ2UiOiJQSE4yWnlCM2FXUjBhRDBpTlRFeWNIZ2lJR2hsYVdkb2REMGlOVEV5Y0hnaUlIWnBaWGRDYjNnOUlqQWdNQ0ExTVRJZ05URXlJaUI0Yld4dWN6MGlhSFIwY0RvdkwzZDNkeTUzTXk1dmNtY3ZNakF3TUM5emRtY2lQZ29nSUR4MGFYUnNaVDVwYjI1cFkyOXVjeTEyTlMxblBDOTBhWFJzWlQ0S0lDQThjR0YwYUNCa1BTSk5ORE15TERJek1DNDNZVGM1TGpRMExEYzVMalEwTERBc01Dd3dMVE15TFRZdU4wZ3hNVEpoTnprdU5URXNOemt1TlRFc01Dd3dMREF0TXpJc05pNDJPV2d3UVRnd0xqQTVMRGd3TGpBNUxEQXNNQ3d3TERNeUxETXdORlkwTVRaaE1UWXNNVFlzTUN3d0xEQXNNeklzTUhZdE9HRTRMakVzT0M0eExEQXNNQ3d4TERndE9FZzBOREJoT0M0eExEZ3VNU3d3TERBc01TdzRMRGgyT0dFeE5pd3hOaXd3TERBc01Dd3pNaXd3VmpNd05FRTRNQzR3T1N3NE1DNHdPU3d3TERBc01DdzBNeklzTWpNd0xqZGFJaTgrQ2lBZ1BIQmhkR2dnWkQwaVRUTTNOaXc0TUVneE16WmhOVFlzTlRZc01Dd3dMREF0TlRZc05UWjJOekpoTkN3MExEQXNNQ3d3TERVdU1URXNNeTQ0TkVFNU5TNDFMRGsxTGpVc01Dd3dMREVzTVRFeUxESXdPR2cwTGpJellUUXNOQ3d3TERBc01DdzBMVE11TlRWQk16SXNNeklzTUN3d0xERXNNVFV5TERFM05tZzFObUV6TWl3ek1pd3dMREFzTVN3ek1TNDRMREk0TGpRMUxEUXNOQ3d3TERBc01DdzBMRE11TlRWb01qUXVORFpoTkN3MExEQXNNQ3d3TERRdE15NDFOVUV6TWl3ek1pd3dMREFzTVN3ek1EUXNNVGMyYURVMllUTXlMRE15TERBc01Dd3hMRE14TGpnc01qZ3VORFVzTkN3MExEQXNNQ3d3TERRc015NDFOVWcwTURCaE9UVXVOVEVzT1RVdU5URXNNQ3d3TERFc01qWXVPRGtzTXk0NE5VRTBMRFFzTUN3d0xEQXNORE15TERJd09GWXhNelpCTlRZc05UWXNNQ3d3TERBc016YzJMRGd3V2lJdlBnbzhMM04yWno0PSJ9"
+    const stayDate = "1262022"
+    const metadata1 = "data:application/json;base64,eyJuYW1lIjoiWW91ciBCb29raW5nIiwgImRlc2NyaXB0aW9uIjogIkRVTU1ZX1BST1BFUlRZX1VSSSIsICJhdHRyaWJ1dGVzIjogMTI2MjAyMiwgImltYWdlIjoiUEhOMlp5QjNhV1IwYUQwaU5URXljSGdpSUdobGFXZG9kRDBpTlRFeWNIZ2lJSFpwWlhkQ2IzZzlJakFnTUNBMU1USWdOVEV5SWlCNGJXeHVjejBpYUhSMGNEb3ZMM2QzZHk1M015NXZjbWN2TWpBd01DOXpkbWNpUGdvZ0lEeDBhWFJzWlQ1cGIyNXBZMjl1Y3kxMk5TMW5QQzkwYVhSc1pUNEtJQ0E4Y0dGMGFDQmtQU0pOTkRNeUxESXpNQzQzWVRjNUxqUTBMRGM1TGpRMExEQXNNQ3d3TFRNeUxUWXVOMGd4TVRKaE56a3VOVEVzTnprdU5URXNNQ3d3TERBdE16SXNOaTQyT1dnd1FUZ3dMakE1TERnd0xqQTVMREFzTUN3d0xETXlMRE13TkZZME1UWmhNVFlzTVRZc01Dd3dMREFzTXpJc01IWXRPR0U0TGpFc09DNHhMREFzTUN3eExEZ3RPRWcwTkRCaE9DNHhMRGd1TVN3d0xEQXNNU3c0TERoMk9HRXhOaXd4Tml3d0xEQXNNQ3d6TWl3d1ZqTXdORUU0TUM0d09TdzRNQzR3T1N3d0xEQXNNQ3cwTXpJc01qTXdMamRhSWk4K0NpQWdQSEJoZEdnZ1pEMGlUVE0zTml3NE1FZ3hNelpoTlRZc05UWXNNQ3d3TERBdE5UWXNOVFoyTnpKaE5DdzBMREFzTUN3d0xEVXVNVEVzTXk0NE5FRTVOUzQxTERrMUxqVXNNQ3d3TERFc01URXlMREl3T0dnMExqSXpZVFFzTkN3d0xEQXNNQ3cwTFRNdU5UVkJNeklzTXpJc01Dd3dMREVzTVRVeUxERTNObWcxTm1Fek1pd3pNaXd3TERBc01Td3pNUzQ0TERJNExqUTFMRFFzTkN3d0xEQXNNQ3cwTERNdU5UVm9NalF1TkRaaE5DdzBMREFzTUN3d0xEUXRNeTQxTlVFek1pd3pNaXd3TERBc01Td3pNRFFzTVRjMmFEVTJZVE15TERNeUxEQXNNQ3d4TERNeExqZ3NNamd1TkRVc05DdzBMREFzTUN3d0xEUXNNeTQxTlVnME1EQmhPVFV1TlRFc09UVXVOVEVzTUN3d0xERXNNall1T0Rrc015NDROVUUwTERRc01Dd3dMREFzTkRNeUxESXdPRll4TXpaQk5UWXNOVFlzTUN3d0xEQXNNemMyTERnd1dpSXZQZ284TDNOMlp6ND0ifQ==";
     beforeEach(async function() {
             Web3BnBStayFactory = await ethers.getContractFactory("Web3BnBStay");
             [owner, hodler1, hodler2] = await ethers.getSigners();
@@ -25,20 +25,19 @@ describe("Mint Web3BnBStay Contract", function() {
             const initialStayBalance = await web3bnbstay.balanceOf(hodler1.address)
             expect(initialStayBalance.toString()).to.equal("0");
             
-            await web3bnbstay.connect(hodler1).mintStay(PROPERTY_URI, 2, 5, nightList, {value:"10"});
+            await web3bnbstay.connect(hodler1).mintStay(PROPERTY_URI, 2, 5, stayDate, {value:"10"});
 
             const finalBalance = await web3bnbstay.balanceOf(hodler1.address)
             expect(finalBalance.toString()).to.equal("1");
         })
 
         it("Should reject mintStay if caller's msg.value too low", async function(){
-            await expect(web3bnbstay.connect(hodler2).mintStay(PROPERTY_URI, 100, 100, nightList, {value: "9999"})).to.be.revertedWith("You don't have enough funds to book this date")
+            await expect(web3bnbstay.connect(hodler2).mintStay(PROPERTY_URI, 100, 100, stayDate, {value: "9999"})).to.be.revertedWith("You don't have enough funds to book this date")
         })
 
         it("Should pass correct metadata into tokenURI", async function(){
-            await web3bnbstay.connect(hodler1).mintStay(PROPERTY_URI, 2, 5, nightList, {value:"10"});
-           // await expect(web3bnbstay.tokenURI(1)).string - need to finish and add string as expected value
-            console.log
+            await web3bnbstay.connect(hodler1).mintStay(PROPERTY_URI, 2, 5, stayDate, {value:"10"});
+            await expect(web3bnbstay.tokenURI(1)).to.equal(metadata1)
         })
     })
    

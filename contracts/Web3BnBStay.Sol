@@ -18,7 +18,7 @@ contract Web3BnBStay is ERC721URIStorage, Ownable {
     event bookingMade(string StayData);
     string logoEncoded = "PHN2ZyB3aWR0aD0iNTEycHgiIGhlaWdodD0iNTEycHgiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDx0aXRsZT5pb25pY29ucy12NS1nPC90aXRsZT4KICA8cGF0aCBkPSJNNDMyLDIzMC43YTc5LjQ0LDc5LjQ0LDAsMCwwLTMyLTYuN0gxMTJhNzkuNTEsNzkuNTEsMCwwLDAtMzIsNi42OWgwQTgwLjA5LDgwLjA5LDAsMCwwLDMyLDMwNFY0MTZhMTYsMTYsMCwwLDAsMzIsMHYtOGE4LjEsOC4xLDAsMCwxLDgtOEg0NDBhOC4xLDguMSwwLDAsMSw4LDh2OGExNiwxNiwwLDAsMCwzMiwwVjMwNEE4MC4wOSw4MC4wOSwwLDAsMCw0MzIsMjMwLjdaIi8+CiAgPHBhdGggZD0iTTM3Niw4MEgxMzZhNTYsNTYsMCwwLDAtNTYsNTZ2NzJhNCw0LDAsMCwwLDUuMTEsMy44NEE5NS41LDk1LjUsMCwwLDEsMTEyLDIwOGg0LjIzYTQsNCwwLDAsMCw0LTMuNTVBMzIsMzIsMCwwLDEsMTUyLDE3Nmg1NmEzMiwzMiwwLDAsMSwzMS44LDI4LjQ1LDQsNCwwLDAsMCw0LDMuNTVoMjQuNDZhNCw0LDAsMCwwLDQtMy41NUEzMiwzMiwwLDAsMSwzMDQsMTc2aDU2YTMyLDMyLDAsMCwxLDMxLjgsMjguNDUsNCw0LDAsMCwwLDQsMy41NUg0MDBhOTUuNTEsOTUuNTEsMCwwLDEsMjYuODksMy44NUE0LDQsMCwwLDAsNDMyLDIwOFYxMzZBNTYsNTYsMCwwLDAsMzc2LDgwWiIvPgo8L3N2Zz4=";
 
-    function mintStay(string calldata propertyURI, uint256 nightlyPrice, uint256 dateCount, string calldata nightList) public payable{
+    function mintStay(string calldata propertyURI, uint256 nightlyPrice, uint256 dateCount, string calldata stayDate) public payable{
        
        //uint256 totalPrice = nightlyPrice * dateCount;
        require (msg.value >= nightlyPrice * dateCount, "You don't have enough funds to book this date");
@@ -27,7 +27,7 @@ contract Web3BnBStay is ERC721URIStorage, Ownable {
         // Associate the address of the NFT owner with the id of the NFT
         _mint(msg.sender, newItemId);
         // Associate the NFT URI with the Id, and format the metadata
-        _setTokenURI(newItemId, formatTokenURI(logoEncoded, "Your Booking", propertyURI, nightList));
+        _setTokenURI(newItemId, formatTokenURI(logoEncoded, "Your Booking", propertyURI, stayDate));
         console.log("TokenURI is", tokenURI(newItemId));
         _tokenIds.increment();
     }
