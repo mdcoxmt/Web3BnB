@@ -7,25 +7,40 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "./base64.sol";
 import "../node_modules/hardhat/console.sol";
 import "./Web3BnBStay.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
+
 
 
 contract Book {
+
     struct datesBooked{
         uint256 dates;
     }
+
     mapping (string => datesBooked) public calendar;
-    function book(string calldata propertyURI, uint256 price, uint256 date) public payable {
-        require(calendar[propertyURI].dates == date);
-        if(msg.value >= price){
+
+    function book(string calldata propertyURI, string calldata price, uint256 date) public payable {
+        
+        require(calendar[propertyURI].dates != date);
+        uint256 _price = stringToUint(price);
+        if(msg.value >= _price){
         { 
            // Web3BnBStay.mintStay(propertyURI, price, date); - runs the mintStay function, need to deploy and plug in address
            calendar[propertyURI].dates = date;
         }
         }
-      
-        
     }
 
-    
+    function stringToUint(string memory s) public pure returns (uint) {
+        bytes memory b = bytes(s);
+        uint result = 0;
+        for (uint256 i = 0; i < b.length; i++) {
+            uint256 c = uint256(uint8(b[i]));
+            if (c >= 48 && c <= 57) {
+                result = result * 10 + (c - 48);
+            }
+        }
+        return result;
+    }
 }
 
