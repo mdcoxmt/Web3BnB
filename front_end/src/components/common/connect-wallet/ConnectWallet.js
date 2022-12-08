@@ -30,7 +30,18 @@ function ConnectWallet({connectWallet, selectedAddress}) {
     console.log('wallet connected')
 
     return (
-      <p>good to go connected mate</p>
+      <>
+        <button
+          className="connect-wallet connect-wallet-disabled"
+          onClick={(selectedAddress) => connectWallet(selectedAddress)}
+          disabled={`${true}`}
+        >
+            <span className="connect-wallet-text">
+                Wallet Successfully
+                <span className="button-second-row">Connected</span>
+            </span>
+        </button>
+      </>
     )
   }
 
