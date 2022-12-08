@@ -1,0 +1,33 @@
+@import '../../../styles/_all-utility-sheets.scss';
+
+$listing-card-bg: hsla(210, 17%, 95%, 0.7);
+
+.listing-card {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,.2);
+    max-width: 350px;
+    // margin-bottom: $baseline;
+    background-color: $listing-card-bg;
+    padding: $small;
+    min-width: 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.listing-card-header {
+    margin-top: $small;
+    text-align: center;
+}
+
+.listing-card-desc {
+    margin-top: $baseline;
+    margin-left: $xxl;
+    font-size: $font-xs;
+    margin-bottom: $baseline;
+}
+
+.web3bnb-rental-property-photo {
+    width: 80%;
+    margin-top: $large;
+    border-radius: 30px;
+    align-self: center;
+}
