@@ -8,26 +8,24 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "./base64.sol";
 import "../node_modules/hardhat/console.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
 
-
-contract Web3BnBStay is ERC721URIStorage, Ownable {
+contract Web3BnBListing is ERC721URIStorage, Ownable {
     using Counters for Counters.Counter;
 
     Counters.Counter private _tokenIds;
-    constructor() ERC721("Web3BnBStay", "STAY"){}
-    event bookingMade(string StayData);
+    constructor() ERC721("Web3BnBStay", "LIST"){}
+
     string logoEncoded = "PHN2ZyB3aWR0aD0iNTEycHgiIGhlaWdodD0iNTEycHgiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPgogIDx0aXRsZT5pb25pY29ucy12NS1nPC90aXRsZT4KICA8cGF0aCBkPSJNNDMyLDIzMC43YTc5LjQ0LDc5LjQ0LDAsMCwwLTMyLTYuN0gxMTJhNzkuNTEsNzkuNTEsMCwwLDAtMzIsNi42OWgwQTgwLjA5LDgwLjA5LDAsMCwwLDMyLDMwNFY0MTZhMTYsMTYsMCwwLDAsMzIsMHYtOGE4LjEsOC4xLDAsMCwxLDgtOEg0NDBhOC4xLDguMSwwLDAsMSw4LDh2OGExNiwxNiwwLDAsMCwzMiwwVjMwNEE4MC4wOSw4MC4wOSwwLDAsMCw0MzIsMjMwLjdaIi8+CiAgPHBhdGggZD0iTTM3Niw4MEgxMzZhNTYsNTYsMCwwLDAtNTYsNTZ2NzJhNCw0LDAsMCwwLDUuMTEsMy44NEE5NS41LDk1LjUsMCwwLDEsMTEyLDIwOGg0LjIzYTQsNCwwLDAsMCw0LTMuNTVBMzIsMzIsMCwwLDEsMTUyLDE3Nmg1NmEzMiwzMiwwLDAsMSwzMS44LDI4LjQ1LDQsNCwwLDAsMCw0LDMuNTVoMjQuNDZhNCw0LDAsMCwwLDQtMy41NUEzMiwzMiwwLDAsMSwzMDQsMTc2aDU2YTMyLDMyLDAsMCwxLDMxLjgsMjguNDUsNCw0LDAsMCwwLDQsMy41NUg0MDBhOTUuNTEsOTUuNTEsMCwwLDEsMjYuODksMy44NUE0LDQsMCwwLDAsNDMyLDIwOFYxMzZBNTYsNTYsMCwwLDAsMzc2LDgwWiIvPgo8L3N2Zz4=";
 
-    function mintStay(string calldata propertyURI, uint256 nightlyPrice, uint256 dateCount, string calldata stayDate) public payable{
-       
-       //uint256 totalPrice = nightlyPrice * dateCount;
-       require (msg.value >= nightlyPrice * dateCount, "You don't have enough funds to book this date");
+    function mintListing(uint256 nightlyPrice, string calldata streetAddress, string calldata description) public payable{
         // Set the latest Id for the NFT minted here. 
         uint256 newItemId = _tokenIds.current();
         // Associate the address of the NFT owner with the id of the NFT
         _mint(msg.sender, newItemId);
+        string memory _nightlyPrice = Strings.toString(nightlyPrice);
         // Associate the NFT URI with the Id, and format the metadata
-        _setTokenURI(newItemId, formatTokenURI(logoEncoded, "Your Booking", propertyURI, stayDate));
+        _setTokenURI(newItemId, formatTokenURI(logoEncoded, streetAddress, description, _nightlyPrice));
         console.log("TokenURI is", tokenURI(newItemId));
         _tokenIds.increment();
     }
@@ -40,13 +38,13 @@ contract Web3BnBStay is ERC721URIStorage, Ownable {
                 Base64.encode(
                     bytes(
                         abi.encodePacked(
-                             // name of NFT, "Your Booking"
+                             // Address of Listing
                             '{"name":"', _name,
-                             // propertyURI, URI of the associated ListingNFT
+                             // Description of Property
                             '", "description": "', _description, '"',
-                            // date booked
+                            // string array of dates booked
                             ', "attributes": ', _properties,
-                             // standard Web3BnB logo, wherever that URI is
+                             // standard Web3BnB logo
                             ', "image":"', _imageURI, '"}'
                         )
                     )
