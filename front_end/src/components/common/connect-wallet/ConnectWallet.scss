@@ -1,0 +1,33 @@
+@import '../../../styles/_all-utility-sheets.scss';
+
+$button-color: hsla(62, 49%, 75%, 1);
+$button-color-hover: hsla(62, 49%, 65%, 1);
+$button-bg: hsla(209, 28%, 16%, 1);
+$button-bg-hover: hsla(209, 28%, 21%, 1);
+
+.connect-wallet {
+    font-family: $title-font;
+    font-size: 14px;
+    font-weight: 600;
+    // text-transform: uppercase;
+    width: 125px;
+    height: 50px;
+    background-color: $header-bg-desaturated-2;
+    color: $bg;
+    border: 2px solid $bg-true;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+    border-radius: 15px;
+    transition: .33s;
+    margin-top: $xs;
+    &:hover {
+        cursor: pointer;
+        background-color: $header-bg-desaturated-1;
+        border: 2px solid $header-bg-desaturated-2;
+        color: $bg-true;
+    }
+}
+
+.button-second-row {
+    display: block;
+}
+

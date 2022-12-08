@@ -2,10 +2,17 @@ import React, { useEffect } from 'react'
 import './Home.scss'
 
 import SearchBar from '../../components/common/search-bar/SearchBar'
+import RenderWalletMode from '../../components/common/render-wallet-mode/RenderWalletMode'
+import ConnectWallet from '../../components/common/connect-wallet/ConnectWallet'
+
+
+import { ethers } from "ethers";
 
 import imgRentalCabin from '../../assets/rental_cabin.jpg';
 
-const Main = ({}) => {
+const Home = ({connectWallet, selectedAddress}) => {
+  
+  console.log('Home selectedAddress:', selectedAddress)
 
   return (
     <>
@@ -15,6 +22,10 @@ const Main = ({}) => {
       </p>
 
       <SearchBar />
+
+      <ConnectWallet connectWallet={connectWallet} selectedAddress={selectedAddress}/>
+
+      {/* <RenderWalletMode connectWallet={connectWallet} selectedAddress={selectedAddress} /> */}
       
       <section className="rental-properties-examples">
         <p className="site-default">
@@ -23,8 +34,8 @@ const Main = ({}) => {
       </section>
 
       <img className="web3bnb-rental-cabin-photo" alt="web3bnb-rental-cabin" src={imgRentalCabin} />
-    </>
+  </>
   )
 }
 
-export default Main
+export default Home
